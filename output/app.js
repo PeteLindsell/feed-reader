@@ -35,7 +35,7 @@ var FeadBox = _react2.default.createClass({
   render: function render() {
     return _react2.default.createElement(
       "div",
-      null,
+      { className: "container" },
       _react2.default.createElement(
         "div",
         null,
@@ -91,7 +91,7 @@ exports.default = FeadItems;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 
 var _react = require("react");
@@ -101,18 +101,26 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = _react2.default.createClass({
-  displayName: "Header",
-  render: function render() {
-    return _react2.default.createElement(
-      "header",
-      null,
-      _react2.default.createElement(
-        "h1",
-        null,
-        "Latest news"
-      )
-    );
-  }
+		displayName: "Header",
+		render: function render() {
+				return _react2.default.createElement(
+						"header",
+						{ className: "navbar navbar-inverse navbar-fixed-top" },
+						_react2.default.createElement(
+								"div",
+								{ className: "container" },
+								_react2.default.createElement(
+										"div",
+										{ className: "navbar-header" },
+										_react2.default.createElement(
+												"a",
+												{ className: "navbar-brand", href: "#" },
+												"Latest News"
+										)
+								)
+						)
+				);
+		}
 });
 
 exports.default = Header;

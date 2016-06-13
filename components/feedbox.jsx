@@ -6,7 +6,7 @@ const FeadBox = React.createClass ({
 
   render() {
     return (
-    	<div>
+    	<div className="container">
     		<div>This is a feed box</div>
 	      <FeedItems />
 			</div>
