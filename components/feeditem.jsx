@@ -3,7 +3,7 @@ import React from "react";
 const FeadItem = React.createClass ({
   render: function() {
     return (
-	    <li>
+	    <li className="list-group-item">
 	    	<a href={this.props.link}>
           <h2 className="commentAuthor">
             {this.props.title}

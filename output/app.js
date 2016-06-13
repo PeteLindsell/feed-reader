@@ -67,7 +67,7 @@ var FeadItem = _react2.default.createClass({
   render: function render() {
     return _react2.default.createElement(
       "li",
-      null,
+      { className: "list-group-item" },
       _react2.default.createElement(
         "a",
         { href: this.props.link },
@@ -122,8 +122,8 @@ var FeadItems = _react2.default.createClass({
       );
     });
     return _react2.default.createElement(
-      "div",
-      { className: "feedList" },
+      "ul",
+      { className: "list-group" },
       feedItems
     );
   }
