@@ -1,6 +1,7 @@
 import React from "react";
 
 import FeedItems from "./feeditems";
+import FeedSelect from "./feedselect";
 
 var data = [
   {id: 1, title: "title 1", text: "this is discription one", link:"www.google.com"},
@@ -37,12 +38,7 @@ const FeadBox = React.createClass ({
   render: function() {
     return (
     	<div className="container">
-		    <select className="form-control" value={"global"}>
-			    <option value="global">Global and UK News Feeds</option>
-			    <option value="video">Video & Audio News Feeds</option>
-			    <option value="other">Other News Feeds</option>
-			  </select>
-
+		    <FeedSelect />
 	      <FeedItems data={this.state.data}/>
 			</div>
     );
