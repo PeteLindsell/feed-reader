@@ -8,8 +8,9 @@ const FeadItem = React.createClass ({
           <h2 className="commentAuthor">
             {this.props.title}
           </h2>
-        
-          <span> {this.props.summary} </span>
+        	
+        	<img className="image" src={this.props.image} />
+          <div> {this.props.summary} </div>
         </a> 
 	    </li>
     );

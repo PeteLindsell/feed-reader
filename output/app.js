@@ -103,8 +103,9 @@ var FeadItem = _react2.default.createClass({
           { className: "commentAuthor" },
           this.props.title
         ),
+        _react2.default.createElement("img", { className: "image", src: this.props.image }),
         _react2.default.createElement(
-          "span",
+          "div",
           null,
           " ",
           this.props.summary,
@@ -142,7 +143,7 @@ var FeadItems = _react2.default.createClass({
     var feedItems = this.props.data.map(function (feed) {
       return _react2.default.createElement(
         _feeditem2.default,
-        { link: feed.link, title: feed.title, summary: feed.summary, key: feed.pubdate_ms },
+        { link: feed.link, image: feed.image.url, title: feed.title, summary: feed.summary, key: feed.pubdate_ms },
         feed.text
       );
     });
