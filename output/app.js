@@ -64,9 +64,23 @@ var FeadBox = _react2.default.createClass({
       "div",
       { className: "container" },
       _react2.default.createElement(
-        "div",
-        null,
-        "This is a feed box"
+        "select",
+        { className: "form-control", value: "global" },
+        _react2.default.createElement(
+          "option",
+          { value: "global" },
+          "Global and UK News Feeds"
+        ),
+        _react2.default.createElement(
+          "option",
+          { value: "video" },
+          "Video & Audio News Feeds"
+        ),
+        _react2.default.createElement(
+          "option",
+          { value: "other" },
+          "Other News Feeds"
+        )
       ),
       _react2.default.createElement(_feeditems2.default, { data: this.state.data })
     );

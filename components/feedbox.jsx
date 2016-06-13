@@ -37,7 +37,12 @@ const FeadBox = React.createClass ({
   render: function() {
     return (
     	<div className="container">
-    		<div>This is a feed box</div>
+		    <select className="form-control" value={"global"}>
+			    <option value="global">Global and UK News Feeds</option>
+			    <option value="video">Video & Audio News Feeds</option>
+			    <option value="other">Other News Feeds</option>
+			  </select>
+
 	      <FeedItems data={this.state.data}/>
 			</div>
     );
