@@ -5,7 +5,7 @@ const Header = React.createClass ({
   render() {
     return (
     	<header>
-	      <h1>Site title</h1>
+	      <h1>Latest news</h1>
 			</header>
     );
   }
