@@ -30,6 +30,8 @@ var _feeditems2 = _interopRequireDefault(_feeditems);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var data = [{ id: 1, title: "title 1", text: "this is discription one", link: "www.google.com" }, { id: 2, title: "title 2", text: "this is discription one", link: "www.google.com" }, { id: 3, title: "title 3", text: "this is discription one", link: "www.google.com" }];
+
 var FeadBox = _react2.default.createClass({
   displayName: "FeadBox",
   render: function render() {
@@ -41,7 +43,7 @@ var FeadBox = _react2.default.createClass({
         null,
         "This is a feed box"
       ),
-      _react2.default.createElement(_feeditems2.default, null)
+      _react2.default.createElement(_feeditems2.default, { data: data })
     );
   }
 });
@@ -107,14 +109,12 @@ var _feeditem2 = _interopRequireDefault(_feeditem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data = [{ id: 1, title: "title 1", text: "this is discription one", link: "www.google.com" }, { id: 2, title: "title 2", text: "this is discription one", link: "www.google.com" }, { id: 3, title: "title 3", text: "this is discription one", link: "www.google.com" }];
-
 var FeadItems = _react2.default.createClass({
   displayName: "FeadItems",
 
 
   render: function render() {
-    var feedItems = data.map(function (feed) {
+    var feedItems = this.props.data.map(function (feed) {
       return _react2.default.createElement(
         _feeditem2.default,
         { link: feed.link, title: feed.title, summary: feed.summary, key: feed.id },
