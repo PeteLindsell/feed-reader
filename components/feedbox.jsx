@@ -9,12 +9,36 @@ var data = [
 ];
 
 const FeadBox = React.createClass ({
+	getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    var that = this;
 
-  render() {
+    var url = "http://feeds.bbci.co.uk/news/rss.xml";
+
+    feednami.load(url,function(result){
+        if(result.error) {
+            console.log(result.error);
+        } else {
+            var entries = result.feed.entries;
+            console.log("count = " + entries.length);
+            for(var i = 0; i < entries.length; i++){
+                var entry = entries[i];
+                console.dir(entry);
+            }
+
+            that.setState({data: result.feed.entries});
+
+        }
+    });
+    that = this;
+  },
+  render: function() {
     return (
     	<div className="container">
     		<div>This is a feed box</div>
-	      <FeedItems data={data}/>
+	      <FeedItems data={this.state.data}/>
 			</div>
     );
   }

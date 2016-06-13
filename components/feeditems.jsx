@@ -7,7 +7,7 @@ const FeadItems = React.createClass ({
   render: function() {
   	const feedItems = this.props.data.map(function(feed) {
     return (
-      <FeedItem link={feed.link} title={feed.title} summary={feed.summary} key={feed.id}>
+      <FeedItem link={feed.link} title={feed.title} summary={feed.summary} key={feed.pubdate_ms}>
         {feed.text}
       </FeedItem>
     )

@@ -34,6 +34,31 @@ var data = [{ id: 1, title: "title 1", text: "this is discription one", link: "w
 
 var FeadBox = _react2.default.createClass({
   displayName: "FeadBox",
+
+  getInitialState: function getInitialState() {
+    return { data: [] };
+  },
+  componentDidMount: function componentDidMount() {
+    var that = this;
+
+    var url = "http://feeds.bbci.co.uk/news/rss.xml";
+
+    feednami.load(url, function (result) {
+      if (result.error) {
+        console.log(result.error);
+      } else {
+        var entries = result.feed.entries;
+        console.log("count = " + entries.length);
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
+          console.dir(entry);
+        }
+
+        that.setState({ data: result.feed.entries });
+      }
+    });
+    that = this;
+  },
   render: function render() {
     return _react2.default.createElement(
       "div",
@@ -43,7 +68,7 @@ var FeadBox = _react2.default.createClass({
         null,
         "This is a feed box"
       ),
-      _react2.default.createElement(_feeditems2.default, { data: data })
+      _react2.default.createElement(_feeditems2.default, { data: this.state.data })
     );
   }
 });
@@ -117,7 +142,7 @@ var FeadItems = _react2.default.createClass({
     var feedItems = this.props.data.map(function (feed) {
       return _react2.default.createElement(
         _feeditem2.default,
-        { link: feed.link, title: feed.title, summary: feed.summary, key: feed.id },
+        { link: feed.link, title: feed.title, summary: feed.summary, key: feed.pubdate_ms },
         feed.text
       );
     });
