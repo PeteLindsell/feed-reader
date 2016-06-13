@@ -35,6 +35,14 @@ gulp.task('babelify', function () {
     .pipe(gulp.dest('./output/'));
 });
 
+gulp.task('test', function () {
+  return gulp.src('./test/**/*.js', { read: false })
+    .pipe(plug.mocha({
+      compilers: {
+        js: babel
+      }
+    }));
+});
 
 gulp.task('build', ['babelify', 'css',], function(){
   return gulp.src('./index.html')
