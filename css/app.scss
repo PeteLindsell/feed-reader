@@ -1,0 +1,12 @@
+@import "variables";
+@import "bootstrap";
+@import "bootstrap/theme";
+
+body {
+    padding-top: 60px;
+    background: $gray-lighter;
+}
+
+.list-group-item img {
+	height: 100px;
+}
