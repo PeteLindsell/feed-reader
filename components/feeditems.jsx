@@ -1,16 +1,28 @@
 import React from "react";
 
+import FeedItem from "./feeditem";
+
+var data = [
+  {id: 1, title: "title 1", text: "this is discription one", link:"www.google.com"},
+  {id: 2, title: "title 2", text: "this is discription one", link:"www.google.com"},
+  {id: 3, title: "title 3", text: "this is discription one", link:"www.google.com"},
+];
+
 const FeadItems = React.createClass ({
 
-  render() {
+  render: function() {
+  	var feedItems = data.map(function(feed) {
     return (
-    	<div>
-	      <ul>
-	      	<li>item 1</li>
-	      	<li>item 2</li>
-	      </ul>
-			</div>
-    );
+      <FeedItem link={feed.link} title={feed.title} summary={feed.summary} key={feed.id}>
+        {feed.text}
+      </FeedItem>
+    )
+  })
+	return (
+    <div className="feedList">
+      {feedItems}
+    </div>
+  );
   }
 });
 
