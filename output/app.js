@@ -173,32 +173,89 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FeedSelect = _react2.default.createClass({
   displayName: "FeedSelect",
 
-  getInitialState: function getInitialState() {
-    return { value: 'lobal' };
+  getDefaultProps: function getDefaultProps() {
+    return {
+      fieldMap: {
+        "global": [{ value: "news/world/africa", label: "Africa" }, { value: "news/world/asia", label: "Asia" }],
+        "video": [{ value: "news/video_and_audio/news_front_page", label: "Top stories" }, { value: "news/video_and_audio/world", label: "World" }],
+        "other": [{ value: "news/world/africa", label: "Africa" }, { value: "news/world/asia", label: "Asia" }]
+      }
+    };
   },
-  handleChange: function handleChange(event) {
-    this.setState({ value: event.target.value });
+  getInitialState: function getInitialState() {
+    return {
+      firstValue: '',
+      secondValue: '',
+      feed: 'news/world/asia'
+    };
+  },
+  getOptions: function getOptions(key) {
+    if (!this.props.fieldMap[key]) {
+      return null;
+    }
+
+    return this.props.fieldMap[key].map(function (el, i) {
+      return _react2.default.createElement(
+        "option",
+        { key: i, value: el.value },
+        el.label
+      );
+    });
+  },
+  handleFirstLevelChange: function handleFirstLevelChange(event) {
+    this.setState({
+      firstValue: event.target.value,
+      secondValue: ''
+    });
+  },
+  handleSecondLevelChange: function handleSecondLevelChange(event) {
     console.log(event.target.value);
+
+    this.setState({ feed: event.target.value });
+    this.setState({
+      secondValue: event.target.value
+    });
+  },
+  getSecondLevelField: function getSecondLevelField() {
+    if (!this.state.firstValue) {
+      return null;
+    }
+
+    return _react2.default.createElement(
+      "select",
+      { className: "form-control", onChange: this.handleSecondLevelChange, value: this.state.secondValue },
+      _react2.default.createElement(
+        "option",
+        { value: "", selected: true, disabled: true },
+        "Please select"
+      ),
+      this.getOptions(this.state.firstValue)
+    );
   },
   render: function render() {
     return _react2.default.createElement(
-      "select",
-      { className: "form-control", value: this.state.value, onChange: this.handleChange },
+      "div",
+      null,
       _react2.default.createElement(
-        "option",
-        { value: "global" },
-        "Global and UK News Feeds"
+        "select",
+        { className: "form-control", onChange: this.handleFirstLevelChange, value: this.state.firstValue },
+        _react2.default.createElement(
+          "option",
+          { value: "global" },
+          "Global and UK News Feeds"
+        ),
+        _react2.default.createElement(
+          "option",
+          { value: "video" },
+          "Video & Audio News Feeds"
+        ),
+        _react2.default.createElement(
+          "option",
+          { value: "other" },
+          "Other News Feeds"
+        )
       ),
-      _react2.default.createElement(
-        "option",
-        { value: "video" },
-        "Video & Audio News Feeds"
-      ),
-      _react2.default.createElement(
-        "option",
-        { value: "other" },
-        "Other News Feeds"
-      )
+      this.getSecondLevelField()
     );
   }
 });
