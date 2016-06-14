@@ -1,5 +1,7 @@
 import React from "react";
 
+import FeedBox from "./feedbox";
+
 const FeedSelect = React.createClass ({
   getDefaultProps: function () {
     // TODO: These should not be hard coded but could not find a list as you would expect from an api.
@@ -54,7 +56,6 @@ const FeedSelect = React.createClass ({
   getInitialState: function() {
      return {
          firstValue: '',
-         secondValue: '',
          feed: 'news/world/asia'
        }
   },
@@ -70,16 +71,11 @@ const FeedSelect = React.createClass ({
   handleFirstLevelChange: function (event) {
     this.setState({
       firstValue: event.target.value,
-      secondValue: ''
     });
   },
   handleSecondLevelChange: function (event) {
     console.log(event.target.value);
-
     this.setState({feed: event.target.value});
-    this.setState({
-      secondValue: event.target.value,
-    });
   },
   getSecondLevelField: function () {
     if (!this.state.firstValue) {
@@ -96,14 +92,17 @@ const FeedSelect = React.createClass ({
   render: function() {
     return (
     <div className="feedSelect">
-      <select className="form-control" onChange={this.handleFirstLevelChange} value={this.state.firstValue}>
-        <option value="" selected disabled>Please select</option>  
-        <option value="popular">Popular BBC News Feeds</option>
-        <option value="global">Global and UK News Feeds</option>
-        <option value="video">Video & Audio News Feeds</option>
-        <option value="other">Other News Feeds</option>
-       </select>
-      {this.getSecondLevelField()}
+      <div className="container">
+        <select className="form-control" onChange={this.handleFirstLevelChange} value={this.state.firstValue}>
+          <option value="" selected disabled>Please select</option>  
+          <option value="popular">Popular BBC News Feeds</option>
+          <option value="global">Global and UK News Feeds</option>
+          <option value="video">Video & Audio News Feeds</option>
+          <option value="other">Other News Feeds</option>
+        </select>
+        {this.getSecondLevelField()}
+      </div>
+      <FeedBox feed={this.state.feed} />
     </div>
     );
   }

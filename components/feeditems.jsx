@@ -13,7 +13,7 @@ const FeadItems = React.createClass ({
     )
   })
 	return (
-    <ul className="list-group">
+    <ul className="list-group feedItems">
       {feedItems}
     </ul>
   );

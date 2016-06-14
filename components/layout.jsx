@@ -1,14 +1,14 @@
 import React from "react";
 
 import Header from "./header";
-import FeedBox from "./feedbox";
+import FeedSelect from "./feedselect";
 
 const Layout = React.createClass ({
-  render() {
+  render: function() {
     return (
       <div>
         <Header />
-        <FeedBox />
+		    <FeedSelect />
       </div>
     );
   }

@@ -4,11 +4,9 @@ const Header = React.createClass ({
 
   render() {
     return (
-    	<header className="navbar navbar-inverse navbar-fixed-top">
+    	<header>
 	      <div className="container">
-	        <div className="navbar-header">
-	          <a className="navbar-brand" href="#">Latest News</a>
-	        </div>
+	         <h1>Latest News</h1>
 	      </div>
 			</header>
     );

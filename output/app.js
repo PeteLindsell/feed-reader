@@ -34,8 +34,6 @@ var _feedselect2 = _interopRequireDefault(_feedselect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data = [{ id: 1, title: "title 1", text: "this is discription one", link: "www.google.com" }, { id: 2, title: "title 2", text: "this is discription one", link: "www.google.com" }, { id: 3, title: "title 3", text: "this is discription one", link: "www.google.com" }];
-
 var FeadBox = _react2.default.createClass({
   displayName: "FeadBox",
 
@@ -43,21 +41,26 @@ var FeadBox = _react2.default.createClass({
     return { data: [] };
   },
   componentDidMount: function componentDidMount() {
+    this.fetchData();
+  },
+  componentWillReceiveProps: function componentWillReceiveProps() {
+    this.fetchData();
+  },
+  fetchData: function fetchData() {
+    // TODO: Add loader to give user feedback of selection.
+    var url = "http://feeds.bbci.co.uk/" + this.props.feed + "/rss.xml";
+    console.log("1" + url);
     var that = this;
 
-    var url = "http://feeds.bbci.co.uk/news/rss.xml";
-
+    // Use feednami as google feed api is deprecated.
     feednami.load(url, function (result) {
       if (result.error) {
         console.log(result.error);
       } else {
         var entries = result.feed.entries;
-        console.log("count = " + entries.length);
         for (var i = 0; i < entries.length; i++) {
           var entry = entries[i];
-          console.dir(entry);
         }
-
         that.setState({ data: result.feed.entries });
       }
     });
@@ -67,8 +70,8 @@ var FeadBox = _react2.default.createClass({
     return _react2.default.createElement(
       "div",
       { className: "container" },
-      _react2.default.createElement(_feedselect2.default, null),
-      _react2.default.createElement(_feeditems2.default, { data: this.state.data })
+      _react2.default.createElement(_feeditems2.default, { data: this.state.data }),
+      "}"
     );
   }
 });
@@ -149,7 +152,7 @@ var FeadItems = _react2.default.createClass({
     });
     return _react2.default.createElement(
       "ul",
-      { className: "list-group" },
+      { className: "list-group feedItems" },
       feedItems
     );
   }
@@ -167,6 +170,10 @@ Object.defineProperty(exports, "__esModule", {
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
+
+var _feedbox = require("./feedbox");
+
+var _feedbox2 = _interopRequireDefault(_feedbox);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -187,7 +194,6 @@ var FeedSelect = _react2.default.createClass({
   getInitialState: function getInitialState() {
     return {
       firstValue: '',
-      secondValue: '',
       feed: 'news/world/asia'
     };
   },
@@ -206,17 +212,12 @@ var FeedSelect = _react2.default.createClass({
   },
   handleFirstLevelChange: function handleFirstLevelChange(event) {
     this.setState({
-      firstValue: event.target.value,
-      secondValue: ''
+      firstValue: event.target.value
     });
   },
   handleSecondLevelChange: function handleSecondLevelChange(event) {
     console.log(event.target.value);
-
     this.setState({ feed: event.target.value });
-    this.setState({
-      secondValue: event.target.value
-    });
   },
   getSecondLevelField: function getSecondLevelField() {
     if (!this.state.firstValue) {
@@ -239,46 +240,51 @@ var FeedSelect = _react2.default.createClass({
       "div",
       { className: "feedSelect" },
       _react2.default.createElement(
-        "select",
-        { className: "form-control", onChange: this.handleFirstLevelChange, value: this.state.firstValue },
+        "div",
+        { className: "container" },
         _react2.default.createElement(
-          "option",
-          { value: "", selected: true, disabled: true },
-          "Please select"
+          "select",
+          { className: "form-control", onChange: this.handleFirstLevelChange, value: this.state.firstValue },
+          _react2.default.createElement(
+            "option",
+            { value: "", selected: true, disabled: true },
+            "Please select"
+          ),
+          _react2.default.createElement(
+            "option",
+            { value: "popular" },
+            "Popular BBC News Feeds"
+          ),
+          _react2.default.createElement(
+            "option",
+            { value: "global" },
+            "Global and UK News Feeds"
+          ),
+          _react2.default.createElement(
+            "option",
+            { value: "video" },
+            "Video & Audio News Feeds"
+          ),
+          _react2.default.createElement(
+            "option",
+            { value: "other" },
+            "Other News Feeds"
+          )
         ),
-        _react2.default.createElement(
-          "option",
-          { value: "popular" },
-          "Popular BBC News Feeds"
-        ),
-        _react2.default.createElement(
-          "option",
-          { value: "global" },
-          "Global and UK News Feeds"
-        ),
-        _react2.default.createElement(
-          "option",
-          { value: "video" },
-          "Video & Audio News Feeds"
-        ),
-        _react2.default.createElement(
-          "option",
-          { value: "other" },
-          "Other News Feeds"
-        )
+        this.getSecondLevelField()
       ),
-      this.getSecondLevelField()
+      _react2.default.createElement(_feedbox2.default, { feed: this.state.feed })
     );
   }
 });
 
 exports.default = FeedSelect;
 
-},{"react":174}],6:[function(require,module,exports){
+},{"./feedbox":2,"react":174}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+  value: true
 });
 
 var _react = require("react");
@@ -288,26 +294,22 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = _react2.default.createClass({
-		displayName: "Header",
-		render: function render() {
-				return _react2.default.createElement(
-						"header",
-						{ className: "navbar navbar-inverse navbar-fixed-top" },
-						_react2.default.createElement(
-								"div",
-								{ className: "container" },
-								_react2.default.createElement(
-										"div",
-										{ className: "navbar-header" },
-										_react2.default.createElement(
-												"a",
-												{ className: "navbar-brand", href: "#" },
-												"Latest News"
-										)
-								)
-						)
-				);
-		}
+  displayName: "Header",
+  render: function render() {
+    return _react2.default.createElement(
+      "header",
+      null,
+      _react2.default.createElement(
+        "div",
+        { className: "container" },
+        _react2.default.createElement(
+          "h1",
+          null,
+          "Latest News"
+        )
+      )
+    );
+  }
 });
 
 exports.default = Header;
@@ -327,27 +329,28 @@ var _header = require("./header");
 
 var _header2 = _interopRequireDefault(_header);
 
-var _feedbox = require("./feedbox");
+var _feedselect = require("./feedselect");
 
-var _feedbox2 = _interopRequireDefault(_feedbox);
+var _feedselect2 = _interopRequireDefault(_feedselect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Layout = _react2.default.createClass({
   displayName: "Layout",
+
   render: function render() {
     return _react2.default.createElement(
       "div",
       null,
       _react2.default.createElement(_header2.default, null),
-      _react2.default.createElement(_feedbox2.default, null)
+      _react2.default.createElement(_feedselect2.default, null)
     );
   }
 });
 
 exports.default = Layout;
 
-},{"./feedbox":2,"./header":6,"react":174}],8:[function(require,module,exports){
+},{"./feedselect":5,"./header":6,"react":174}],8:[function(require,module,exports){
 (function (process){
 'use strict';
 

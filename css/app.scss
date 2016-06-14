@@ -2,10 +2,26 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
-body {
-    padding-top: 60px;
-    background: $gray-lighter;
+header {
+	background: $brand-primary;
+	color: white;
+	margin-bottom: 30px;
+
+	h1 {
+    font-size: 2em;
+    font-weight: 300;
+    margin: 20px 0 20px;
+	}
 }
+
+.feedItems a {
+    color: $text-color;
+}
+
+.feedItems a:hover {
+    color: $brand-primary;
+}
+
 
 .feedSelect select {
     margin: 15px 0 15px 0;
