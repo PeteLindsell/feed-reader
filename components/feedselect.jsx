@@ -95,8 +95,9 @@ const FeedSelect = React.createClass ({
   },
   render: function() {
     return (
-    <div>
+    <div className="feedSelect">
       <select className="form-control" onChange={this.handleFirstLevelChange} value={this.state.firstValue}>
+        <option value="" selected disabled>Please select</option>  
         <option value="popular">Popular BBC News Feeds</option>
         <option value="global">Global and UK News Feeds</option>
         <option value="video">Video & Audio News Feeds</option>

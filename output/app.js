@@ -237,10 +237,15 @@ var FeedSelect = _react2.default.createClass({
   render: function render() {
     return _react2.default.createElement(
       "div",
-      null,
+      { className: "feedSelect" },
       _react2.default.createElement(
         "select",
         { className: "form-control", onChange: this.handleFirstLevelChange, value: this.state.firstValue },
+        _react2.default.createElement(
+          "option",
+          { value: "", selected: true, disabled: true },
+          "Please select"
+        ),
         _react2.default.createElement(
           "option",
           { value: "popular" },

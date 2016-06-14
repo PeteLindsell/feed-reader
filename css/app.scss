@@ -7,6 +7,10 @@ body {
     background: $gray-lighter;
 }
 
+.feedSelect select {
+    margin: 15px 0 15px 0;
+}
+
 .list-group-item img {
 	height: 100px;
 }
