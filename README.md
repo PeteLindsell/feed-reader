@@ -1,27 +1,8 @@
-npm install react react-dom babel babel-preset-es2015 babel-preset-react gulp gulp-load-plugins browserify babelify babel-core vinyl-source-stream gulp-open --save-dev
+RSS feed reader app to consume BBC news feeds.
 
-// add gulp watch
-npm install --save-dev gulp-watch
+Built in React with the following setup:
+React, Gulp, Babel, Browserfy, Mocha, Bootstrap
 
-// add gulp batch
-npm install --save-dev gulp-batch
+The majority of me experience of React has been working with the Meteor full stack JS framework. Meteor is overmuch tied to its own build and deployment tools. The smaller things that I have done with React have been using WebPack, so setting up Gulp and the other required frameworks took a bit of effort.
 
-npm install --save-dev gulp-sass
-
-npm install --save-dev gulp-bower
-
-bower init
-
-bower install --save bootstrap-sass
-
-
-// Linting
-
-// Minifying
-npm install gulp-clean-css --save-dev
-
-// Uglify
-
-
-//Testing
-$npm install mocha gulp-mocha jsdom mocha-jsdom react-addons-test-utils --save-dev
+As I like a challenge and don’t like not finishing things I have carried on for an hour this morning adding code to the  carry-on-at-home branch. It is not finished but getting closer to a MVP. Need to go to work now…
